@@ -9,6 +9,6 @@ y = sin(x);
 
 plot(x, y, 'LineWidth', 2);
 grid on;
-title('Grafico di prova - Analisi Numerica');
+title('Graficogg di prova - Analisi Numerica');
 
 
