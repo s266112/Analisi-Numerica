@@ -1,0 +1,19 @@
+# --- MATLAB ---
+*.asv
+*.m~
+*.slxc
+*.slx.r*
+*.autosave
+*.fig
+*.mat
+slprj/
+codegen/
+
+# --- File di sistema ---
+desktop.ini
+.DS_Store
+Thumbs.db
+
+# --- IDE ---
+.vscode/
+.idea/
