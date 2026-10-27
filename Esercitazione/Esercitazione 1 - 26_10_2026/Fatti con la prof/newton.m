@@ -64,4 +64,4 @@ function [x,iter,scarti]=newton(f,df,x0,tol,itmax)
      disp('Raggiunto il numero massimo di iterazioni.');
  end
 
-end 
+end
