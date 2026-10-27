@@ -9,11 +9,17 @@
 slprj/
 codegen/
 
-# --- File di sistema ---
+# --- File di sistema e IDE ---
 desktop.ini
 .DS_Store
 Thumbs.db
-
-# --- IDE ---
 .vscode/
 .idea/
+
+# --- Output generati dagli script (Immagini, Dati) ---
+*.png
+*.jpg
+*.jpeg
+*.txt
+
+
