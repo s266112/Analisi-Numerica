@@ -163,15 +163,3 @@ $$
 
 ---
 
-## 🌿 Git – comandi veloci
-
-```matlab
-!git status
-!git add .
-!git commit -m "Esercitazione 1 completata 🎉"
-!git push
-```
-
----
-
-✨ *Fatto con tanta pazienza e qualche `NaN` di troppo* 😅
