@@ -24,6 +24,7 @@ figure (1);
 
     % 2. Disegno l'asse x
     plot ([0.01, 0.2], [0 0], 'k-');
+    ylim([-1.6 7]);
     hold off;
 
     % 3. Aggiungo titolo, etichette e griglia
@@ -121,7 +122,7 @@ figure (2);
 
 % --- Stima di p e C per la relazione (Punto 3b) ---
 
-    % 1. Prendo come radice di riferimento l'ultima iterata di Steffensen (la più precisa)
+    % 1. Calcolo la radice di riferimento alpha con fzero
     alpha = fzero(f, x0);
 
     % 2. Calcolo gli errori veri per i tre metodi

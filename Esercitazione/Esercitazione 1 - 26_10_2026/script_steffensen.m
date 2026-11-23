@@ -11,7 +11,7 @@ x0 = 0.5;       % Punto iniziale
 
 
 % --- Grafico della funzione ---
-figure(1);
+figure(4);
 fplot(f, [a b], 'b-', 'LineWidth', 1.5);
 hold on;
 plot([a b], [0 0], 'k-');   % Disegno l'asse x
@@ -33,7 +33,7 @@ fprintf('Numero di iterazioni: %d\n\n', iter);
 
 
 % --- Grafico del profilo di convergenza ---
-figure(2);
+figure(5);
 semilogy(1:iter, abs(scartiv), 'm-*', 'LineWidth', 1.5);
 title('Profilo di convergenza del metodo di Steffensen');
 xlabel('Iterazioni');
@@ -49,13 +49,15 @@ alpha = fzero(f, x0);
 % 2. Calcolo gli errori e_k = |x_k - alpha|
 e = abs(xv - alpha);
 
-% 3. Stima di p e C (usiamo gli ultimi 3 errori)
-if iter >= 3
+% 3. Stima di p e C
+ez = e(e > 0);
+
+if length(ez) >= 3
     % Formula per l'ordine di convergenza p basata sugli ERRORI
-    p_stimato = log(e(end) / e(end-1)) / log(e(end-1) / e(end-2));
+    p_stimato = log(ez(end) / ez(end-1)) / log(ez(end-1) / ez(end-2));
 
     % Formula per la costante asintotica C
-    C_stimato = e(end) / (e(end-1) ^ p_stimato);
+    C_stimato = ez(end) / (ez(end-1) ^ p_stimato);
 
     % Stampo tutto
     fprintf('--- STIMA SPERIMENTALE ---\n');
