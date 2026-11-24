@@ -106,3 +106,7 @@ ylabel('Errore relativo');
 legend('u_n (metodo 1)', 'z_n (metodo 2)', 'y_n (metodo 3)', 'Location', 'southwest');
 grid on;
 
+% --- Salvataggio del grafico per il README ---
+if ~exist('img', 'dir'), mkdir('img'); end                     % Creo la cartella img se non esiste
+exportgraphics(gcf, 'img/pigreco.png', 'Resolution', 150);     % Salvo la figura corrente in PNG
+

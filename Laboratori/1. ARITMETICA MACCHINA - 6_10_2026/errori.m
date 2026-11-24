@@ -42,3 +42,7 @@ xlabel('x');
 ylabel('Errore relativo');
 legend('Errore relativo calcolato', 'Stima eps/x', 'Location', 'northeast');
 grid on;
+
+% --- Salvataggio del grafico per il README ---
+if ~exist('img', 'dir'), mkdir('img'); end                     % Creo la cartella img se non esiste
+exportgraphics(gcf, 'img/errori.png', 'Resolution', 150);      % Salvo la figura corrente in PNG

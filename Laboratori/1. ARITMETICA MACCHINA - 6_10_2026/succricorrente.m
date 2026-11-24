@@ -51,3 +51,8 @@ xlabel('n');
 ylabel('|I_n|');
 legend('in avanti', 'all''indietro', 'Location', 'northwest');
 grid on;
+
+
+% --- Salvataggio del grafico per il README ---
+if ~exist('img', 'dir'), mkdir('img'); end                         % Creo la cartella img se non esiste
+exportgraphics(gcf, 'img/succricorrente.png', 'Resolution', 150);  % Salvo la figura corrente in PNG
