@@ -22,4 +22,9 @@ Thumbs.db
 *.jpeg
 *.txt
 
+# --- Eccezioni: file da tenere nel repo ---
+# Immagini usate nei README (cartelle img/ di ogni laboratorio)
+!**/img/*.png
+# File dei risultati richiesti dagli esercizi (es. Lab 2, slide 21 punto 4)
+!**/risultati_*.txt
 
