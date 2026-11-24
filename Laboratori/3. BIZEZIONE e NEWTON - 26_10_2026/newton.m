@@ -1,68 +1,54 @@
-function [x,iter,scarti]=newton(f,df,x0,tol,itmax)
+function [x, iter, scarti] = newton(f, df, x0, tol, itmax)
+% NEWTON: Calcolo uno zero di f(x) con il metodo di Newton-Raphson.
+%
+% Input:
+%   f      funzione di cui cerco lo zero (function handle)
+%   df     derivata prima di f (function handle)
+%   x0     punto iniziale
+%   tol    tolleranza sullo scarto |x_(k+1) - x_k|
+%   itmax  numero massimo di iterazioni
+%
+% Output:
+%   x       vettore delle approssimazioni (x(1) = x0, x(k+1) = x_k)
+%   iter    numero di iterazioni eseguite
+%   scarti  vettore degli scarti x_(k+1) - x_k (con segno)
 
-% NEWTON:  calcola una radice della funzione fun definita 
-% nell'intervallo [a,b] usando il metodo iterativo di Newton
-% test di arresto sullo scarto (step = residuo pesato)
+% Inizializzo le variabili
+dif = tol + 1;   % Trucco per far partire il while
+iter = 0;        % Contatore delle iterazioni
+xold = x0;       % Approssimazione corrente
+x = x0;          % Vettore delle approssimazioni: il primo elemento è x0
+scarti = [];     % Vettore degli scarti (vuoto all'inizio)
 
+while (abs(dif) > tol) && (iter < itmax)
+    % 1. Calcolo f nel punto corrente
+    fx = feval(f, xold);
 
-% parametri di input: 
-%        f: funzione della quale si cerca una radice in [a,b]
-%        d: derivata prima di f
-%        x0 = approssimazione iniziale
-%        toll: tolleranza  
-%        itmax: numero massimo di iterazioni 
+    % 2. Se f(xold) = 0 ho trovato lo zero esatto: mi fermo
+    if fx == 0
+        return;
+    end
 
-% parametri di output: 
-%        x: vettore delle approssimazione della radice 
-%        iter:  numero di iterazioni effettuate
-%        scarti: vettore degli scarti successivi
-%----------------------------------------------------------------
+    % 3. Calcolo la derivata e controllo che non sia nulla (divisione per zero)
+    dfx = feval(df, xold);
+    if dfx == 0
+        disp('Errore: derivata nulla, il metodo di Newton non può proseguire');
+        return;
+    end
 
+    % 4. Calcolo lo scarto e la nuova approssimazione
+    dif = -fx / dfx;
+    xnew = xold + dif;
 
+    % 5. Aggiorno il contatore e salvo i risultati
+    iter = iter + 1;
+    x = [x; xnew];
+    scarti = [scarti; dif];
+    xold = xnew;
+end
 
-    % Inizializzazione delle variabili
-    xold = x0;       % Iterata Corrente
-    x = [x0];        % Vettore delle soluzioni
-    scarti = [];     % Vettore degli scarti
-    dif = tol + 1;   % Trucco: parte > tot per far entrare nel while
-    iter = 0;        % contatore iterazioni
-
-     % Ciclo iterativo
-     while (abs(dif) > tol) && (iter < itmax)
-         
-         % Calcolo della funzione nel punto corrente
-         fx = feval(f, xold);
-         
-         % Se la funzione è esattamente zero, abbiamo finito
-         if fx == 0
-             return;
-         end
-         
-         % Calcolo della derivata prima
-         dfx = feval(df, xold);
-         
-         % Controllo per evitare la divisione per zero
-         if dfx == 0
-             disp('ERRORE: derivata nulla.');
-             return;
-         end
-         
-         % Aggiornamento del passo e della nuova iterata
-         iter = iter + 1;
-         dif = -fx / dfx;
-         xnew = xold + dif;
-         
-         % Salvataggio dei risultati nei vettori
-         x = [x; xnew];
-         scarti = [scarti; dif];
-         
-         % Aggiornamento per il prossimo passo
-         xold = xnew;
-     end
-     
-     % Avviso se non si è raggiunta la convergenza
-     if iter >= itmax
-         disp('Raggiunto il numero massimo di iterazioni.');
-     end
-
+% Avviso se mi sono fermato per il numero massimo di iterazioni
+if (iter == itmax) && (abs(dif) > tol)
+    disp('Attenzione: raggiunto il numero massimo di iterazioni senza convergenza');
+end
 end
