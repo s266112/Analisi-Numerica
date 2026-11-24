@@ -18,9 +18,9 @@ In questo laboratorio si risolvono equazioni del tipo $f(x) = 0$ con due **metod
 | `demobisezione.m` | 📜 script | $\sqrt{2}$ con bisezione |
 | `es_bisezione.m` | 📜 script | $5x = e^{-x}$ con bisezione + confronto con la stima delle iterazioni |
 | `es_newton.m` | 📜 script | Radice maggiore di $x^2 - 5x + 6$ con Newton |
-| `esproposto1.m` | 📜 script | $e^{-x/4} - x = 0$ con bisezione e Newton |
-| `esproposto2.m` | 📜 script | $x^3 - 2 = 0$ con bisezione e Newton |
-| `esproposto3.m` | 📜 script | $x \log x - 1 = 0$ con bisezione e Newton + intervallo di convergenza garantita |
+| `es_proposto1.m` | 📜 script | $e^{-x/4} - x = 0$ con bisezione e Newton |
+| `es_proposto2.m` | 📜 script | $x^3 - 2 = 0$ con bisezione e Newton |
+| `es_proposto3.m` | 📜 script | $x \log x - 1 = 0$ con bisezione e Newton + intervallo di convergenza garantita |
 | `scriptmod.m` | 📜 script | Newton vs Newton modificato su $(x-1)^2 \log x$ |
 | `risultati_esproposto*.txt` | 📄 output | Risultati degli esercizi proposti scritti su file |
 | `img/` | 🖼️ output | Grafici generati dagli script (usati in questo README) |
@@ -239,8 +239,8 @@ Vicino a $x = 1$ vale $\log x \approx x - 1$, quindi $f(x) \approx (x-1)^3$ → 
 ```matlab
 >> soluzione_aula_newton
 >> es_bisezione
->> esproposto3
+>> es_proposto3
 >> scriptmod
 ```
 
-Ogni script stampa i risultati in colonne, apre i grafici e salva le immagini in `img/` 📊. Gli esercizi proposti scrivono anche i risultati in `risultati_esproposto*.txt` 📄. 📄.
+Ogni script stampa i risultati in colonne, apre i grafici e salva le immagini in `img/` 📊. Gli esercizi proposti scrivono anche i risultati in `risultati_esproposto*.txt` 📄. 
