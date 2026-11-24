@@ -65,4 +65,4 @@ grid on;
 % --- Salvataggio del grafico per il README ---
 cartella = fullfile(fileparts(mfilename('fullpath')), 'img');                         % Cartella img accanto allo script
 if ~exist(cartella, 'dir'), mkdir(cartella); end                                       % La creo se non esiste
-exportgraphics(figure(1), fullfile(cartella, 'biomeccanica.png'), 'Resolution', 150);  % Salvo il grafico
+exportgraphics(figure(1), fullfile(cartella, 'biomeccanica_interp.png'), 'Resolution', 150);  % Salvo il grafico
