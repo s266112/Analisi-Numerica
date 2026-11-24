@@ -1,15 +1,15 @@
 %------------------------------------------
-% ESERCIZIO: Calcolo della radice dell'equzione : x^2 + 2px - q = 0
+% ESERCIZIO: Calcolo della radice dell'equazione : x^2 + 2px - q = 0
 %------------------------------------------
 
 clear; clc; % Pulisco sempre workspace e command window prima di iniziare
 
-% Caso test 1 (Definiamo i parametri p, q e la soluzione esatta per confronto)
+% --- Parametri di input ---
 p = 1000; 
 q = 0.018000000081; 
 sol = 0.9 * 10^(-5);
 
-% ALGORITMO 1 (Formula classica: y = -p + sqrt(p^2 + q))
+% ALGORITMO 1: Formula classica: y = -p + sqrt(p^2 + q)
 s = p^2;
 t = s + q; % Questo è l'argomento della nostra radice (il "delta" in un certo senso)
 
@@ -19,6 +19,7 @@ if t >= 0
 else
     % Se t è negativo, stampo un avviso a schermo e non calcolo la radice
     fprintf('\n \t [RADICI COMPLESSE]');
+    return
 end
 
 % Calcolo della radice usando la sottrazione (Qui si nasconde l'instabilità!)
@@ -27,7 +28,7 @@ s1 = -p + u;
 % Vado a capo per staccare i risultati dal metodo successivo
 fprintf('\n');
 
-% ALGORITMO 2 (Formula razionalizzata per evitare la cancellazione)
+% ALGORITMO 2: Forma Razionalizzata
 s = p^2;
 t = s + q;
 
@@ -35,13 +36,14 @@ if t >= 0
     u = sqrt(t);
 else
     fprintf('\n \t [RADICI COMPLESSE]');
+    return
 end
 
 % Invece di sottrarre, sommiamo p alla radice e facciamo la divisione
 v = p + u;
 t1 = q / v;
 
-% STAMPA RISULTATI
+% --- Stampa dei risultati ---
 fprintf('\n \t [ALG.1]: %10.16f', s1);
 fprintf('\n \t [ALG.2]: %10.16f', t1);
 

@@ -3,7 +3,7 @@
 % ==========================================
 
 
-% Metodo 1:
+% METODO 1:
 
 clear; clc  % Pulisce la memoria e la schermata (ottima abitudine)
 
@@ -21,7 +21,7 @@ for n = 2:40
     u(n+1) = sqrt(6 * s(n+1));
 
     % Stampo a schermo l'indice e l'errore relativo a ogni iterazione
-    fprintf('\n \t [SEQ.1][INDEX]: %3.0f', n);
+    fprintf('\n \t [SEQ.1][INDEX]: %3.0f', n+1);
     fprintf(' [REL.ERR]: %2.2e', abs(u(n+1)-pi)/pi);
 end
 
@@ -49,7 +49,7 @@ for n = 2:40
     z(n+1) = (2^(n-0.5)) * sqrt(1 - inner_sqrt);
 
     % Stampo a schermo l'avanzamento
-    fprintf('\n \t [SEQ.2][N]: %3.0f', n);
+    fprintf('\n \t [SEQ.2][N]: %3.0f', n+1);
     fprintf(' [REL.ERR]: %2.2e', abs(z(n+1)-pi)/pi);
 end
 
@@ -67,7 +67,7 @@ y(2) = 2;
 
 % Ciclo da 2 a 40
 for n = 2:40
-    % Calcolo numeratore e denominatore separatamente per evitare instabilità
+    % Formula razionalizzata: 1 + sqrt(1-c) al denominatore evita la cancellazione di 1 - sqrt(1-c)
     num = (2^(1/2)) * abs(y(n)); 
     c = (4^(1-n)) * (y(n))^2;
     inner_sqrt = sqrt(1-c);
@@ -77,7 +77,7 @@ for n = 2:40
     y(n+1) = num / den;
 
     % Stampo a schermo l'avanzamento
-    fprintf('\n \t [SEQ.3][N]: %3.0f', n);
+    fprintf('\n \t [SEQ.3][N]: %3.0f', n+1);
     fprintf(' [REL.ERR]: %2.2e', abs(y(n+1)-pi)/pi);
 end
 
@@ -88,14 +88,21 @@ fprintf('\n');
 rel_err_y = abs(y-pi)/pi;
 
 
-% SEMILOGY PLOT.
-% Disegno la prima curva (punti neri)
-semilogy(1:length(u), rel_err_u, 'k.'); 
-hold on; % Mantiene la figura aperta per aggiungere le altre curve
+% --- Grafico semilogaritmico degli errori relativi ---
+figure;
+% 1. Disegno l'errore relativo della prima successione (punti neri)
+semilogy(1:length(u), rel_err_u, 'k.', 'LineWidth', 1.5);
+hold on;  % Mantengo la figura per aggiungere le altre curve
 
-% Aggiungo la seconda curva (croci magenta) e la terza (cerchi rossi)
-semilogy(1:length(z), rel_err_z, 'm+'); 
-semilogy(1:length(y), rel_err_y, 'ro'); 
-hold off; % Rilascia la figura
+% 2. Disegno la seconda (croci magenta) e la terza successione (cerchi rossi)
+semilogy(1:length(z), rel_err_z, 'm+', 'LineWidth', 1.5);
+semilogy(1:length(y), rel_err_y, 'ro', 'LineWidth', 1.5);
+hold off;
 
+% 3. Aggiungo titolo, etichette, legenda e griglia
+title('Errore relativo delle tre successioni rispetto a \pi');
+xlabel('n');
+ylabel('Errore relativo');
+legend('u_n (metodo 1)', 'z_n (metodo 2)', 'y_n (metodo 3)', 'Location', 'southwest');
+grid on;
 

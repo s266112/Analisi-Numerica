@@ -2,6 +2,8 @@
 % ESERCIZIO: Calcolo errore relativo della funzione: (1+x)-1
 %-------------------------------------
 
+clear; clc;  % Pulisco workspace e command window
+
 % Definisco l'intervallo degli esponenti (Vettore riga da 1 a 15)
 esp=1:15;
 
@@ -18,15 +20,25 @@ errrel=abs(x-ris)./abs(x);  % Uso "./" per dividere elemento per elemento
 A=[x' ris' errrel'];        % Uso (') per trasporre i vettorri da riga a colonna
 
 % Stampo le intestazioni della tabella
-% (s = stringa, il numero indica lo spazio riservato per allineare il testo)
-fprintf('%14s %20s %17s \n','x','(1+x)-1', 'Err-rel');
+fprintf('%17s %24s %10s \n','x','(1+x)-1', 'Err-rel');  % Stesse larghezze dei dati (17, 24, 10)
 
 % Stampo i valori veri e propri
 % NB: Passo "A'" (la trasposta di A) perché la funzione fprintf di MATLAB legge le matrici scendendo per le colonne, non per le righe!
 fprintf('%17.3e %24.15e %10.2e \n',A');
 
-% Grafico degli errori relativi
-loglog(x,errrel,'b-*');
-title('Errore relativo su (1+x)-1')
-xlabel('x')
-ylabel('Errore relativo')
+% --- Grafico degli errori relativi ---
+figure;
+% 1. Disegno l'errore relativo in scala bilogaritmica
+loglog(x, errrel, 'b-*', 'LineWidth', 1.5);
+hold on;  % Mantengo la figura per la retta di riferimento
+
+% 2. Disegno la stima teorica dell'errore: eps/x
+loglog(x, eps ./ x, 'r--', 'LineWidth', 1.5);
+hold off;
+
+% 3. Aggiungo titolo, etichette, legenda e griglia
+title('Errore relativo su (1+x)-1');
+xlabel('x');
+ylabel('Errore relativo');
+legend('Errore relativo calcolato', 'Stima eps/x', 'Location', 'northeast');
+grid on;
